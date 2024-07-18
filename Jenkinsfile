@@ -28,7 +28,7 @@ pipeline {
                 PROJECT_NAME = "Spring-Petclinic"
             }
             steps{
-                sh 'mvn clean package sonar:sonar -Dsonar.projectKey=${PROJECT_NAME} -Dsonar.host.url=http://${SNQ_IP}:9000 -Dsonar.login=${SNQ_TOKEN}'
+                sh './mvnw clean package sonar:sonar -Dsonar.projectKey=${PROJECT_NAME} -Dsonar.host.url=http://${SNQ_IP}:9000 -Dsonar.login=${SNQ_TOKEN}'
             }
         }
     }
