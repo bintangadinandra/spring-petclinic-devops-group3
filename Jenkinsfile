@@ -1,10 +1,6 @@
 pipeline {
     agent any 
 
-    environment {
-        SCANNER_HOME=tool 'sonar-scanner'
-    }
-
     stages {
         stage('Stage 1') {
             steps {
@@ -13,6 +9,9 @@ pipeline {
         }
 
         // stage("Sonarqube Analysis"){
+        //     environment {
+        //         SCANNER_HOME=tool 'sonar-scanner'
+        //     }
         //     steps{
         //         withSonarQubeEnv('sonar-server') {
         //             sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Petclinic \
