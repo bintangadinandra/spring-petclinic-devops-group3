@@ -13,7 +13,7 @@ pipeline {
                     sh 'docker pull owasp/zap2docker-stable'
 
                     // Run OWASP ZAP Docker container
-                    sh 'docker run -u zap -d -v $(pwd):/zap/wrk/:rw --name owasp-zap owasp/zap2docker-stable zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true'
+                    sh 'docker run -u zap -d -v $(pwd):/zap/wrk/:rw --name owasp-zap zaproxy/zap-stable zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true'
 
                     // Give OWASP ZAP some time to start
                     sleep 30
