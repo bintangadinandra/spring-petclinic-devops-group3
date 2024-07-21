@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     // Pull the OWASP ZAP Docker image
-                    sh 'docker pull owasp/zap2docker-stable'
+                    sh 'docker pull zaproxy/zap-stable'
 
                     // Run OWASP ZAP Docker container
                     sh 'docker run -u zap -d -v $(pwd):/zap/wrk/:rw --name owasp-zap zaproxy/zap-stable zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true'
