@@ -13,7 +13,7 @@ pipeline {
                     sh 'docker pull zaproxy/zap-bare'
 
                     // Run OWASP ZAP Docker container
-                    sh 'docker run --name zap -p 8090:8090 -i zaproxy/zap-bare zap.sh -cmd -port 8090 -quickurl http://www.google.com -quickout /zap/zap-report.html'
+                    sh 'docker run --platform linux/arm64 --name zap -p 8090:8090 -i zaproxy/zap-bare zap.sh -cmd -port 8090 -quickurl http://www.google.com -quickout /zap/zap-report.html'
 
                     // Give OWASP ZAP some time to start
                     sleep 30
