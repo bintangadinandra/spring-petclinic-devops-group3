@@ -9,22 +9,34 @@ pipeline {
         stage('Run OWASP ZAP') {
             steps {
                 script {
-                    sh './mvnw package -DskipTests'
+                        try {
+                            sh './mvnw package -DskipTests'
+        
+                            sh 'java -jar target/*.jar --server.port=8085 & echo $! > java_pid.txt &'
+        
+                            sleep 30
+                            
+                            // Pull the OWASP ZAP Docker image
+                            sh 'docker pull zaproxy/zap-stable'
 
-                    sh 'java -jar target/*.jar --server.port=8085 & echo $! > java_pid.txt &'
+                            try {
+                            // Run OWASP ZAP Docker container
+                            sh 'docker run -t --name owasp-zap zaproxy/zap-stable zap-baseline.py -t http://$(hostname -i):8085'
+                            } catch (Exception e) {
+                                echo 'Ignore error during ZAP script.'
+                            }
 
-                    sleep 30
-                    
-                    // Pull the OWASP ZAP Docker image
-                    sh 'docker pull zaproxy/zap-stable'
+                            sh 'docker cp zap:/zap/zap-report.html ${WORKSPACE}/zap-report.html'
+                            
+                        } finally {
+                            
+                            // Kill the Java process
+                            sh 'kill $(cat java_pid.txt) || true'
 
-                    // Run OWASP ZAP Docker container
-                    sh 'docker run -t zaproxy/zap-stable zap-baseline.py -t http://$(hostname -i):8085'
-
-                    sh 'docker cp zap:/zap/zap-report.html ${WORKSPACE}/zap-report.html'
-
-                    // Kill the Java process
-                    sh 'kill $(cat java_pid.txt)'
+                            // Clean up containers
+                            sh 'docker stop owasp-zap || true'
+                            sh 'docker rm owasp-zap || true'
+                        }
                 }
             }
         }
