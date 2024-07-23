@@ -19,7 +19,7 @@ pipeline {
                     sh 'docker pull zaproxy/zap-stable'
 
                     // Run OWASP ZAP Docker container
-                    sh "docker run -t zaproxy/zap-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8085"
+                    sh """docker run -t zaproxy/zap-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8085"""
 
                     sh 'docker cp zap:/zap/zap-report.html ${WORKSPACE}/zap-report.html'
 
