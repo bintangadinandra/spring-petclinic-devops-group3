@@ -44,20 +44,20 @@ pipeline {
             }
         }
     }
-    // post {
-    //     always {
-    //         script {
-    //             // Publish the HTML report
-    //             publishHTML(target: [
-    //                 allowMissing: false,
-    //                 alwaysLinkToLastBuild: true,
-    //                 keepAll: true,
-    //                 reportDir: '',
-    //                 reportFiles: 'testreport.html',
-    //                 reportName: 'OWASP ZAP Report',
-    //                 reportTitles: 'OWASP ZAP Security Test Report'
-    //             ])
-    //         }
-    //     }
-    // }
+    post {
+        always {
+            script {
+                // Publish the HTML report
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: '',
+                    reportFiles: 'testreport.html',
+                    reportName: 'OWASP ZAP Report',
+                    reportTitles: 'OWASP ZAP Security Test Report'
+                ])
+            }
+        }
+    }
 }
