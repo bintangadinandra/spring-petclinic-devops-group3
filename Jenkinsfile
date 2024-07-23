@@ -21,7 +21,7 @@ pipeline {
 
                             try {
                             // Run OWASP ZAP Docker container
-                            sh 'docker run -t --name owasp-zap zaproxy/zap-stable zap-baseline.py -t http://$(hostname -i):8085 -r results.html'
+                            sh 'docker run -t --name owasp-zap zaproxy/zap-stable zap-baseline.py -t http://$(hostname -i):8085 -r results.html && pwd && ls'
                             } catch (Exception e) {
                                 echo 'Ignore error during ZAP script.'
                                 sh 'pwd'
