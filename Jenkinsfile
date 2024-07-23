@@ -29,7 +29,7 @@ pipeline {
                                 sh 'ls'
                             }
 
-                            sh 'docker cp owasp-zap:/zap/wrk/results.html ${WORKSPACE}/zap-report.html'
+                            sh 'docker cp owasp-zap:/zap/wrk/testreport.html ${WORKSPACE}/testreport.html'
                             
                         } finally {
                             
