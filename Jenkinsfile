@@ -20,5 +20,16 @@ pipeline {
                 echo "(Please use this) Host SonarQube Dashboard URL: http://localhost:9000/dashboard?id=${env.PROJECT_NAME}"
             }
         }
+
+        stage('Build Project') {
+            steps {
+                sh './mvnw clean package'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                ansiblePlaybook credentialsId: 'ansible-vault', playbook: 'deploy.yml', inventory: 'inventory/production'
+            }
+        }
     }
 }
