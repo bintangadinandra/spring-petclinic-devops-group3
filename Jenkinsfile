@@ -64,7 +64,7 @@ pipeline {
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: '/zap',
+                    reportDir: '',
                     reportFiles: 'testreport.html',
                     reportName: 'OWASP ZAP Report',
                     reportTitles: 'OWASP ZAP Security Test Report'
