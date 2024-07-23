@@ -20,5 +20,13 @@ pipeline {
                 echo "(Please use this) Host SonarQube Dashboard URL: http://localhost:9000/dashboard?id=${env.PROJECT_NAME}"
             }
         }
+
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(['3b2c0f43-795b-42dd-9b38-372e90573878']) {
+                    sh 'ansible-playbook -i inventory deploy.yml'
+                }
+            }
+        }
     }
 }
