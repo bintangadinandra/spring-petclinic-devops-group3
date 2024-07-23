@@ -26,7 +26,7 @@ pipeline {
                                 echo 'Ignore error during ZAP script.'
                             }
 
-                            sh 'docker cp zap:/zap/zap-report.html ${WORKSPACE}/zap-report.html'
+                            sh 'docker cp owasp-zap:/zap/zap-report.html ${WORKSPACE}/zap-report.html'
                             
                         } finally {
                             
