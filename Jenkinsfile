@@ -1,10 +1,19 @@
 pipeline {
     agent any 
+    
+    environment {
+        APP_NAME = 'spring-petclinic-devops'
+    }
 
     stages {
-        stage('Build') {
+         stage('Build') {
             steps {
-                sh './mvnw clean package'
+                script {
+                    def pom = readMavenPom file: 'pom.xml'
+                    env.VERSION = pom.version
+                }
+                sh "mvn clean install"
+                sh "mv target/${env.APP_NAME}-${env.VERSION}.jar target/${env.APP_NAME}.jar"
             }
         }
 
