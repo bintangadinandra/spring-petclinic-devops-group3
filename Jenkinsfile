@@ -3,17 +3,18 @@ pipeline {
 
     stages {
         stage('Clean') {
-            try {
-                sh 'rm testreport.html'
-            } catch (Exception e) {
-                echo 'no test here'
+            steps {
+                try {
+                    sh 'rm testreport.html'
+                } catch (Exception e) {
+                    echo 'no test here'
+                }
+                try {
+                    sh 'rm zap.yaml'
+                } catch (Exception e) {
+                    echo 'no yml here'
+                }
             }
-            try {
-                sh 'rm zap.yaml'
-            } catch (Exception e) {
-                echo 'no yml here'
-            }
-
         }
 
         stage('Build') {
