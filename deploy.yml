@@ -10,8 +10,8 @@
 
     - name: Copy application jar to EC2
       copy:
-        src: target/spring-petclinic-devops.jar
-        dest: /home/ubuntu/spring-petclinic-devops.jar
+        src: target/spring-petclinic-3.3.0-SNAPSHOT.jar
+        dest: /home/ubuntu/spring-petclinic-3.3.0-SNAPSHOT.jar
 
     - name: Copy systemd service file
       copy:
@@ -22,7 +22,7 @@
 
           [Service]
           User=ubuntu
-          ExecStart=/usr/bin/java -jar /home/ubuntu/spring-petclinic-devops.jar
+          ExecStart=/usr/bin/java -jar /home/ubuntu/spring-petclinic-3.3.0-SNAPSHOT.jar
           Restart=always
           RestartSec=10
 
