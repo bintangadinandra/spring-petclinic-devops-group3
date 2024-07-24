@@ -1,13 +1,7 @@
 pipeline {
     agent any 
 
-    stages {
-        stage('Stage 1') {
-            steps {
-                echo 'Hello world!' 
-            }
-        }
-
+    stages { 
         stage('Build') {
             steps {
                 sh './mvnw clean package'
@@ -27,12 +21,12 @@ pipeline {
         //     }
         // }
 
-        stage('Deploy to EC2') {
-            steps {
-                sshagent(['3b2c0f43-795b-42dd-9b38-372e90573878']) {
-                    sh 'ansible-playbook -i inventory deploy.yml'
-                }
-            }
-        }
+        // stage('Deploy to EC2') {
+        //     steps {
+        //         sshagent(['3b2c0f43-795b-42dd-9b38-372e90573878']) {
+        //             sh 'ansible-playbook -i inventory deploy.yml'
+        //         }
+        //     }
+        // }
     }
 }
