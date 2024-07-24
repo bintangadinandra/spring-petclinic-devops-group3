@@ -24,7 +24,7 @@
 
           [Service]
           User=ubuntu
-          ExecStart=/usr/bin/java -jar /home/ubuntu/spring-petclinic-3.3.0-SNAPSHOT.jar
+          ExecStart=java -jar /home/ubuntu/spring-petclinic-3.3.0-SNAPSHOT.jar
           Restart=always
           RestartSec=10
 
@@ -36,4 +36,4 @@
       systemd:
         name: spring-petclinic
         enabled: yes
-        state: started
+        state: restarted
