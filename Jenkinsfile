@@ -21,14 +21,6 @@ pipeline {
         //     }
         // }
 
-         stage('Set SSH Key Permissions') {
-            steps {
-                sshagent(credentials: ['3b2c0f43-795b-42dd-9b38-372e90573878']) {
-                    sh 'chmod 600 ~/.ssh/id_rsa'
-                }
-            }
-        }
-
         stage('Deploy to EC2') {
             steps {
                 ansiblePlaybook(
